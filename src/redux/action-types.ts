@@ -1,5 +1,4 @@
-export const IMPORT_CSV_BILL = "IMPORT_CSV_BILL" 
-export const IMPORT_CSV_CATEGORY = "IMPORT_CSV_CATEGORY" 
+export const IMPORT_CSV = "IMPORT_CSV" 
 export const ADD_BILL = "ADD_BILL"
 
 export const SET_MONTH_FILTER = "SET_MONTH_FILTER"

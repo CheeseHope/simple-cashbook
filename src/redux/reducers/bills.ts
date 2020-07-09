@@ -1,31 +1,34 @@
-import { IMPORT_CSV_BILL, IMPORT_CSV_CATEGORY, ADD_BILL } from '../action-types'
+import { IMPORT_CSV, ADD_BILL } from '../action-types'
 import redux from 'redux'
 
 interface StateType {
-    tableTitles: Array<string>;
+    billTitles: Array<string>;
     allBills: Array<{ time: Date, type: number, category?: string, amount: number }>;
     allCategorys: Array<{ id: string; name: string; type: number }>
 }
 
 const initState = {
-    tableTitles: [],
+    billTitles: [],
     allBills: [],
     allCategorys: []
 }
 
 export default function (state: StateType = initState, action: redux.AnyAction) {
     switch (action.type) {
-        case IMPORT_CSV_BILL:
-            const { titles, datas } = transformIntoArr(action.payload, true)
-            return {
-                ...state,
-                tableTitles: titles,
-                allBills: datas
-            }
-        case IMPORT_CSV_CATEGORY:
-            return {
-                ...state,
-                allCategorys: transformIntoArr(action.payload)
+        case IMPORT_CSV:
+            const { csvType, csvText } = action.payload
+            if (csvType === 'bill') {
+                const { titles, datas } = transformIntoArr(csvText, true)
+                return {
+                    ...state,
+                    billTitles: titles,
+                    allBills: datas
+                }
+            } else {
+                return {
+                    ...state,
+                    allCategorys: transformIntoArr(action.payload)
+                }
             }
         case ADD_BILL:
             const { time, type, category, amount } = action.payload
@@ -34,7 +37,7 @@ export default function (state: StateType = initState, action: redux.AnyAction) 
                 allBills: state.allBills.concat([{ time, type, category, amount }])
             }
         default:
-            break
+            return state
     }
 }
 
