@@ -1,12 +1,14 @@
 import React from 'react'
 import CsvImport from './components/csv-import'
 import Table from './components/table'
+import MonthFilter from './components/month-filter'
 import './style.css'
 
 function App() {
   return (
     <div className="App">
       <CsvImport csvType="bill" />
+      <MonthFilter/>
       <Table columns={[
         {
           title: '时间',

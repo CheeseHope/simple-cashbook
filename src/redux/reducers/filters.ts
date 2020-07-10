@@ -2,16 +2,16 @@ import { SET_MONTH_FILTER } from '../action-types'
 import redux from 'redux'
 
 interface StateType {
-    month: string; // 2020-06
+    month: string; // 2020-6
     category: string;
 }
 
 const initState = {
-    month: null,
+    month: '',
     category: ''
 }
 
-export default function (state = initState, action: redux.AnyAction) {
+export default function (state: StateType = initState, action: redux.AnyAction) {
     switch (action.type) {
         case SET_MONTH_FILTER:
             return {
