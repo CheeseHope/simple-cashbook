@@ -4,6 +4,7 @@ import { connect } from "react-redux"
 interface Props {
     columns: Array<{ title: string, dataIndex: string, key?: string, render?(value: any): any }>;
     datas: Array<any>;
+    summarys?(datas: Array<any>): any;
 }
 
 function Table(props: Props) {
@@ -21,6 +22,7 @@ function Table(props: Props) {
                 {props.datas.map((data, index) => <tr key={`line${index}`}>
                     {props.columns.map((column, index) => (<td key={`${column.dataIndex}-${index}`}>{column.render ? column.render(data[column.dataIndex]) : data[column.dataIndex]}</td>))}
                 </tr>)}
+                {props.summarys && props.summarys(props.datas)}
             </tbody>
         </table>
     </div>)

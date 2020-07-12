@@ -24,7 +24,12 @@ function CsvImport(props: Props) {
         }
     }
 
-    return (<input type="file" onChange={(e) => changeFile(props.csvType, e.target.files ? e.target.files : '')} />)
+    return (
+        <div>
+            <label>请导入{props.csvType === 'bill' ? '账单' : '分类'}数据：</label>
+            <input type="file" onChange={(e) => changeFile(props.csvType, e.target.files ? e.target.files : '')} />
+        </div>
+    )
 }
 
 export default connect(null, {

@@ -8,7 +8,7 @@ function App() {
   return (
     <div className="App">
       <CsvImport csvType="bill" />
-      <MonthFilter/>
+      <MonthFilter />
       <Table columns={[
         {
           title: '时间',
@@ -29,7 +29,36 @@ function App() {
           dataIndex: 'amount',
           render: (value) => (`￥${value}`)
         }
-      ]} />
+      ]}
+        summarys={(datas) => {
+          return <>
+            <tr>
+              <td>总计</td>
+              <td>收入</td>
+              <td>¥{datas.reduce((accumulator, currentValue) => {
+                if (parseInt(currentValue.type) === 1) {
+                  return accumulator + parseInt(currentValue.amount)
+                } else {
+                  return accumulator
+                }
+              }, 0)}
+              </td>
+            </tr>
+            <tr>
+              <td>总计</td>
+              <td>支出</td>
+              <td>¥{datas.reduce((accumulator, currentValue) => {
+                if (parseInt(currentValue.type) === 0) {
+                  return accumulator + parseInt(currentValue.amount)
+                } else {
+                  return accumulator
+                }
+              }, 0)}
+              </td>
+            </tr>
+          </>
+        }}
+      />
     </div>
   );
 }
