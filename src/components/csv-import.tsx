@@ -17,7 +17,6 @@ function CsvImport(props: Props) {
             }
             var reader = new FileReader();
             reader.onload = function (e) {
-                console.log(e)
                 props.importCsv(type, e.target ? e.target.result : '')
             };
             reader.readAsText(file);

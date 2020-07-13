@@ -32,6 +32,8 @@ function Table(props: Props) {
 const mapStateToProps = (state: any) => {
     const { bills, filters } = state
 
+    let datas
+
     function checkMonth(data: any) {
         let year = parseInt(filters.month.split('-')[0])
         let month = parseInt(filters.month.split('-')[1])
@@ -40,13 +42,18 @@ const mapStateToProps = (state: any) => {
     }
 
     if (filters.month !== '') {
-        return {
-            datas: bills.allBills.filter(checkMonth)
-        }
+        datas = bills.allBills.filter(checkMonth)
+    } else {
+        datas = bills.allBills
     }
-    return {
-        datas: bills.allBills
+
+
+    console.log(bills.categoryMap)
+    if (Object.keys(bills.categoryMap).length > 0 ) {
+        datas = datas.map((item: any) => ({ ...item, category: bills.categoryMap[item.category].name }))
     }
+
+    return { datas }
 }
 
 export default connect(mapStateToProps)(Table);

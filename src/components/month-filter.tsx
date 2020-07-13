@@ -44,7 +44,6 @@ function MonthFilter(props: Props) {
     }, [])
 
     const changeSelect = (e: any, type: 'year' | 'month') => {
-        console.log(e.target.value)
         if (type === 'year') {
             setSelectedYear(e.target.value)
         } else {

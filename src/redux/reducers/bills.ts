@@ -4,13 +4,15 @@ import redux from 'redux'
 interface StateType {
     billTitles: Array<string>;
     allBills: Array<{ time: Date, type: number, category?: string, amount: number }>;
-    allCategorys: Array<{ id: string; name: string; type: number }>
+    allCategorys: Array<{ id: string; name: string; type: number }>;
+    categoryMap: any;
 }
 
 const initState = {
     billTitles: [],
     allBills: [],
-    allCategorys: []
+    allCategorys: [],
+    categoryMap:{}
 }
 
 export default function (state: StateType = initState, action: redux.AnyAction) {
@@ -25,9 +27,11 @@ export default function (state: StateType = initState, action: redux.AnyAction) 
                     allBills: datas
                 }
             } else {
+                const datas = transformIntoArr(csvText)
                 return {
                     ...state,
-                    allCategorys: transformIntoArr(action.payload)
+                    allCategorys: datas,
+                    categoryMap: toMap(datas)
                 }
             }
         case ADD_BILL:
@@ -65,4 +69,12 @@ function transformIntoArr(csvText: string, titleNeed?: boolean) {
     }
 
     return datasNew
+}
+
+function toMap(arrWithId: Array<any>) {
+    let map: any = new Object()
+    for (let i = 0; i < arrWithId.length; i++) {
+        map[arrWithId[i].id] = arrWithId[i]
+    }
+    return map
 }

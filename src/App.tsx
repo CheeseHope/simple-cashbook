@@ -2,18 +2,20 @@ import React from 'react'
 import CsvImport from './components/csv-import'
 import Table from './components/table'
 import MonthFilter from './components/month-filter'
+import AddBill from './components/add-bill'
 import './style.css'
 
 function App() {
   return (
     <div className="App">
+      <CsvImport csvType="category" />
       <CsvImport csvType="bill" />
       <MonthFilter />
       <Table columns={[
         {
           title: '时间',
           dataIndex: 'time',
-          render: (value) => (new Date(parseInt(value)).toLocaleDateString())
+          render: (value) => (new Date(parseInt(value)).toString())
         },
         {
           title: '类型',
