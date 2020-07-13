@@ -15,7 +15,7 @@ function App() {
         {
           title: '时间',
           dataIndex: 'time',
-          render: (value) => (new Date(parseInt(value)).toString())
+          render: (value) => (new Date(parseInt(value)).toLocaleDateString())
         },
         {
           title: '类型',
