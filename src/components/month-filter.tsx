@@ -67,7 +67,7 @@ function MonthFilter(props: Props) {
         return null
     }
 
-    return (<div>
+    return (<div style={{marginBottom:'10px'}}>
         <label>月份选择：</label>
         <select onChange={(e) => changeSelect(e, 'year')}>
             <option value="">--Please choose Year--</option>
