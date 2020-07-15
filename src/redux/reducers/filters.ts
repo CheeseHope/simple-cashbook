@@ -1,4 +1,4 @@
-import { SET_MONTH_FILTER } from '../action-types'
+import { SET_MONTH_FILTER, SET_CATEGORY_FILTER } from '../action-types'
 import redux from 'redux'
 
 interface StateType {
@@ -18,6 +18,12 @@ export default function (state: StateType = initState, action: redux.AnyAction) 
                 ...state,
                 month: action.payload
             }
+        case SET_CATEGORY_FILTER:
+            return {
+                ...state,
+                category: action.payload
+            }
+
         default:
             return state
     }

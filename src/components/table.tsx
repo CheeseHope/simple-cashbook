@@ -38,14 +38,22 @@ const mapStateToProps = (state: any) => {
         return year === new Date(parseInt(data.time)).getFullYear() && month === new Date(parseInt(data.time)).getMonth() + 1
     }
 
-    if (filters.month !== '') {
-        datas = bills.allBills.filter(checkMonth)
-    } else {
-        datas = bills.allBills
+    function checkCategory(data: any) {
+        return data.category === filters.category
     }
 
-    if (Object.keys(bills.categoryMap).length > 0 ) {
-        datas = datas.map((item: any) => ({ ...item, category: item.category ? bills.categoryMap[item.category].name: '' }))
+    datas = bills.allBills
+
+    if (filters.month !== '') {
+        datas = datas.filter(checkMonth)
+    }
+
+    if (filters.category !== '') {
+        datas = datas.filter(checkCategory)
+    }
+
+    if (Object.keys(bills.categoryMap).length > 0) {
+        datas = datas.map((item: any) => ({ ...item, category: item.category ? bills.categoryMap[item.category].name : '' }))
     }
 
     return { datas }

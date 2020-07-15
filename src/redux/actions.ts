@@ -1,9 +1,9 @@
-import { IMPORT_CSV, ADD_BILL, SET_MONTH_FILTER } from './action-types'
+import { IMPORT_CSV, ADD_BILL, SET_MONTH_FILTER, SET_CATEGORY_FILTER } from './action-types'
 
 export const importCsv = (type: 'bill' | 'category', csvText: any) => ({
     type: IMPORT_CSV,
     payload: {
-        csvType:type,
+        csvType: type,
         csvText
     }
 })
@@ -18,4 +18,9 @@ export const addBill = (time: string, type: string, amount: number, category: st
 export const setMonthFilter = (month: string) => ({
     type: SET_MONTH_FILTER,
     payload: month
+})
+
+export const setCategoryFilter = (category: string) => ({
+    type: SET_CATEGORY_FILTER,
+    payload: category
 })

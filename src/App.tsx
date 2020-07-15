@@ -3,6 +3,7 @@ import { useState } from 'react'
 import CsvImport from './components/csv-import'
 import Table from './components/table'
 import MonthFilter from './components/month-filter'
+import Category from './components/category-filter'
 import AddBill from './components/add-bill'
 import './style.css'
 
@@ -12,10 +13,14 @@ function App() {
     <div className="App">
       <CsvImport csvType="category" />
       <CsvImport csvType="bill" />
-      <label>可自行添加账单：</label>
-      <button onClick={() => setShowAddBill(true)}>添加账单</button>
+      <div style={{marginBottom:'10px'}}>
+        <label>可自行添加账单：</label>
+        <button onClick={() => setShowAddBill(true)}>添加账单</button>
+      </div>
       <AddBill show={showAddBill} close={() => setShowAddBill(false)} />
       <MonthFilter />
+
+      <Category />
       <Table columns={[
         {
           title: '时间',
@@ -42,7 +47,7 @@ function App() {
             <tr>
               <td>总计</td>
               <td>收入</td>
-              <td/>
+              <td />
               <td>¥{datas.reduce((accumulator, currentValue) => {
                 if (parseInt(currentValue.type) === 1) {
                   return accumulator + parseInt(currentValue.amount)
@@ -53,9 +58,9 @@ function App() {
               </td>
             </tr>
             <tr>
-              <td>总计</td>
+              <td>总计</td> 
               <td>支出</td>
-              <td/>
+              <td />
               <td>¥{datas.reduce((accumulator, currentValue) => {
                 if (parseInt(currentValue.type) === 0) {
                   return accumulator + parseInt(currentValue.amount)
