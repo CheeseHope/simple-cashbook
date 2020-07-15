@@ -24,7 +24,7 @@ export default function (state: StateType = initState, action: redux.AnyAction) 
                 return {
                     ...state,
                     billTitles: titles,
-                    allBills: datas
+                    allBills: state.allBills.concat(datas)
                 }
             } else {
                 const datas = transformIntoArr(csvText)

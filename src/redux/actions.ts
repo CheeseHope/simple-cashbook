@@ -8,7 +8,7 @@ export const importCsv = (type: 'bill' | 'category', csvText: any) => ({
     }
 })
 
-export const addBill = (time: Date, type: number, amount: number, category: string) => ({
+export const addBill = (time: string, type: string, amount: number, category: string) => ({
     type: ADD_BILL,
     payload: {
         time, type, amount, category

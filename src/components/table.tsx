@@ -1,5 +1,6 @@
 import React from 'react'
 import { connect } from "react-redux"
+import style from './table.module.css'
 
 interface Props {
     columns: Array<{ title: string, dataIndex: string, key?: string, render?(value: any): any }>;
@@ -8,11 +9,7 @@ interface Props {
 }
 
 function Table(props: Props) {
-    if (props.datas.length === 0) {
-        return null
-    }
-
-    return (<div>
+    return (<div className={style.table}>
         <table>
             <thead>
                 <tr>{props.columns.map((column, index) => <th key={`title${index}`}>{column.title}</th>)}</tr>
@@ -47,10 +44,8 @@ const mapStateToProps = (state: any) => {
         datas = bills.allBills
     }
 
-
-    console.log(bills.categoryMap)
     if (Object.keys(bills.categoryMap).length > 0 ) {
-        datas = datas.map((item: any) => ({ ...item, category: bills.categoryMap[item.category].name }))
+        datas = datas.map((item: any) => ({ ...item, category: item.category ? bills.categoryMap[item.category].name: '' }))
     }
 
     return { datas }
