@@ -53,7 +53,8 @@ function App(props: any) {
       </div>
       <AddBill show={showAddBill} close={() => setShowAddBill(false)} />
       <MonthFilter />
-      <button onClick={() => setSummaryType('payment')} disabled={props.month === '' || props.category !== ''}>统计月支出</button>
+      <button onClick={() => setSummaryType('payment')} disabled={props.month === '' || props.category !== ''} style={{marginRight:'10px'}}>统计月支出</button>
+      <button onClick={() => setSummaryType('total')} disabled={summaryType === 'total'}>取消统计月支出</button>
       <Category />
       <Table columns={[
         {
